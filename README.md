@@ -1,2 +1,2 @@
-# ZYXM
-swing训练
+# 卓越项目
+java se 聊天项目
