@@ -36,14 +36,22 @@ public class ServerH3 implements Runnable{
                 String h3 = new String(bytes,0,len);
                 String Nh3 = "h3 "+h3;
 
-                OutputStream outputStreamH2 = socketH2.getOutputStream();
-                outputStreamH2.write(Nh3.getBytes());
+                if (socketH1 != null) {
+                    OutputStream outputStreamH2 = socketH1.getOutputStream();
+                    outputStreamH2.write(Nh3.getBytes());
+                }
 
-                OutputStream outputStreamH3 = socketH3.getOutputStream();
-                outputStreamH3.write(Nh3.getBytes());
 
-                OutputStream outputStreamH4 = socketH4.getOutputStream();
-                outputStreamH4.write(Nh3.getBytes());
+                if (socketH2 != null) {
+                    OutputStream outputStreamH3 = socketH2.getOutputStream();
+                    outputStreamH3.write(Nh3.getBytes());
+                }
+
+
+                if (socketH4 != null) {
+                    OutputStream outputStreamH4 = socketH4.getOutputStream();
+                    outputStreamH4.write(Nh3.getBytes());
+                }
 
             } catch (IOException e) {
                 return;

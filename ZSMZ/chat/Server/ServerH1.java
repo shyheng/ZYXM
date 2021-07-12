@@ -12,13 +12,11 @@ public class ServerH1 implements Runnable{
     Socket socketH3;
     Socket socketH4;
     public ServerH1(Socket socketH1,
-                    Socket socketH2,
-                    Socket socketH3,
-                    Socket socketH4) {
+                    Socket ...sockets) {
         this.socketH1 = socketH1;
-        this.socketH2 = socketH2;
-        this.socketH3 = socketH3;
-        this.socketH4 = socketH4;
+        this.socketH2 = sockets[0];
+        this.socketH3 = sockets[1];
+        this.socketH4 = sockets[2];
     }
     @Override
     public void run() {
@@ -36,14 +34,22 @@ public class ServerH1 implements Runnable{
                 String h1 = new String(bytes,0,len);
                 String Nh1 = "h1 "+h1;
 
-                OutputStream outputStreamH2 = socketH2.getOutputStream();
-                outputStreamH2.write(Nh1.getBytes());
+                if (socketH2 != null) {
+                    OutputStream outputStreamH2 = socketH2.getOutputStream();
+                    outputStreamH2.write(Nh1.getBytes());
+                }
 
-                OutputStream outputStreamH3 = socketH3.getOutputStream();
-                outputStreamH3.write(Nh1.getBytes());
 
-                OutputStream outputStreamH4 = socketH4.getOutputStream();
-                outputStreamH4.write(Nh1.getBytes());
+                if (socketH3 != null) {
+                    OutputStream outputStreamH3 = socketH3.getOutputStream();
+                    outputStreamH3.write(Nh1.getBytes());
+                }
+
+
+                if (socketH4 != null) {
+                    OutputStream outputStreamH4 = socketH4.getOutputStream();
+                    outputStreamH4.write(Nh1.getBytes());
+                }
 
             } catch (IOException e) {
                 return;
